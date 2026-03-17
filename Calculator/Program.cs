@@ -7,18 +7,28 @@ class Calculator
         while (true)
         {
             Console.WriteLine("Введите первое число (или 'q' для выхода):");
-            string input1 = Console.ReadLine();
+            string? input1 = Console.ReadLine();
 
-            if (input1.ToLower() == "q")
+            if (input1?.ToLower() == "q")
                 break;
 
-            double num1 = Convert.ToDouble(input1);
+            if (!double.TryParse(input1, out double num1))
+            {
+                Console.WriteLine("Ошибка: некорректное число!");
+                continue;
+            }
 
             Console.WriteLine("Введите второе число:");
-            double num2 = Convert.ToDouble(Console.ReadLine());
+            string? input2 = Console.ReadLine();
+        
+            if (!double.TryParse(input2, out double num2))
+            {
+                Console.WriteLine("Ошибка: некорректное число!");
+                continue;
+            }
 
             Console.WriteLine("Выберите операцию (+, -, *, /):");
-            string operation = Console.ReadLine();
+            string? operation = Console.ReadLine();
 
             double result = 0;
 
@@ -53,7 +63,5 @@ class Calculator
             Console.WriteLine("Результат: " + result);
             Console.WriteLine();
         }
-
-        Console.WriteLine("Программа завершена.");
     }
 }
